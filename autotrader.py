@@ -173,7 +173,7 @@ def resetHistories():
     truncateFile( filePathTradeHistoryBtcEur )
     appendNewLineInFile( filePathTradeHistoryBtcEur, 'timestamp' + CSV_DELMITER + 'id' + CSV_DELMITER + 'BTC' + CSV_DELMITER + 'EUR' + CSV_DELMITER + 'rate' )
     appendNewLineInFile( filePathTradeHistoryBtcEur, '1528524100' + CSV_DELMITER + str(getUniqueId()) + CSV_DELMITER + '+19620000' + CSV_DELMITER + '-109890' + CSV_DELMITER + '540000' )
-    appendNewLineInFile( filePathTradeHistoryBtcEur, '1538262307' + CSV_DELMITER + str(getUniqueId()) + CSV_DELMITER + '-19620000' + CSV_DELMITER + '109890' + CSV_DELMITER + '564091' ) # 564091
+    appendNewLineInFile( filePathTradeHistoryBtcEur, '1538262307' + CSV_DELMITER + str(getUniqueId()) + CSV_DELMITER + '-19620000' + CSV_DELMITER + '109890' + CSV_DELMITER + '575000' )
     # reset exchange rate history
     truncateFile( filePathExchangerateHistoryBtcEur )
     appendNewLineInFile( filePathExchangerateHistoryBtcEur, 'timestamp' + CSV_DELMITER + 'rate' )
