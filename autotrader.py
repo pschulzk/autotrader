@@ -173,11 +173,12 @@ def resetHistories():
     truncateFile( filePathTradeHistoryBtcEur )
     appendNewLineInFile( filePathTradeHistoryBtcEur, 'timestamp' + CSV_DELMITER + 'id' + CSV_DELMITER + 'BTC' + CSV_DELMITER + 'EUR' + CSV_DELMITER + 'rate' )
     appendNewLineInFile( filePathTradeHistoryBtcEur, '1528524100' + CSV_DELMITER + str(getUniqueId()) + CSV_DELMITER + '+19620000' + CSV_DELMITER + '-109890' + CSV_DELMITER + '540000' )
-    appendNewLineInFile( filePathTradeHistoryBtcEur, '1538262307' + CSV_DELMITER + str(getUniqueId()) + CSV_DELMITER + '-19620000' + CSV_DELMITER + '109890' + CSV_DELMITER + '564091' )
+    appendNewLineInFile( filePathTradeHistoryBtcEur, '1538262307' + CSV_DELMITER + str(getUniqueId()) + CSV_DELMITER + '-19620000' + CSV_DELMITER + '109890' + CSV_DELMITER + '564091' ) # 564091
     # reset exchange rate history
     truncateFile( filePathExchangerateHistoryBtcEur )
     appendNewLineInFile( filePathExchangerateHistoryBtcEur, 'timestamp' + CSV_DELMITER + 'rate' )
     appendNewLineInFile( filePathExchangerateHistoryBtcEur, '1528524100' + CSV_DELMITER + '558264' )
+    # appendNewLineInFile( filePathExchangerateHistoryBtcEur, '1528524100' + CSV_DELMITER + '590000' )
 
 # Set wallets to initial, empty value
 def resetWallets():
@@ -323,21 +324,18 @@ def checkIfSell():
 
     print '### Rate Comparison: last exchange rate BTC/EUR: ' + str(int(rateOfLastTradeBtcEur)) + ', current exchange rate BTC/EUR: ' + str(int(currentExchangeRateBtcEurInCents)) + ' => percentual difference: ' + str( rateOfLastTradeBtcEur / currentExchangeRateBtcEurInCents )
     # if empty EUR fund, wait for BTC selling point
-    if getCurrentBalanceBtc > 0:
+    if getCurrentBalanceBtc() > 0:
         # if current sell rate is greater than last sell rate by 6 percent, then SELL
         if ( float( rateOfLastTradeBtcEur / currentExchangeRateBtcEurInCents ) >= 1.06 ):
-            print 'SELL NOW -> last exchange rate BTC/EUR: ' + str(int(rateOfLastTradeBtcEur)) + ', current exchange rate BTC/EUR: ' + str(int(currentExchangeRateBtcEurInCents)) + ' => percentual difference: ' + str( rateOfLastTradeBtcEur / currentExchangeRateBtcEurInCents )
+            print '### SELLING NOW -> last exchange rate BTC/EUR: ' + str(int(rateOfLastTradeBtcEur)) + ', current exchange rate BTC/EUR: ' + str(int(currentExchangeRateBtcEurInCents)) + ' => percentual difference: ' + str( rateOfLastTradeBtcEur / currentExchangeRateBtcEurInCents )
             sellBtcForEur( getCurrentBalanceBtc() )
 
     # if empty BTC fund, wait for EUR selling point
-    if getCurrentBalanceEur > 0:
+    if getCurrentBalanceEur() > 0:
         # if current buy rate is lesser than last buy rate by 6 percent, then BUY
         if ( float( rateOfLastTradeBtcEur / currentExchangeRateBtcEurInCents ) <= 0.94 ):
-            print 'BUY NOW -> last exchange rate BTC/EUR: ' + str(int(rateOfLastTradeBtcEur)) + ', current exchange rate BTC/EUR: ' + str(int(currentExchangeRateBtcEurInCents)) + ' => percentual difference: ' + str( rateOfLastTradeBtcEur / currentExchangeRateBtcEurInCents )
+            print '### BUYING NOW -> last exchange rate BTC/EUR: ' + str(int(rateOfLastTradeBtcEur)) + ', current exchange rate BTC/EUR: ' + str(int(currentExchangeRateBtcEurInCents)) + ' => percentual difference: ' + str( rateOfLastTradeBtcEur / currentExchangeRateBtcEurInCents )
             buyBtcForEur( getCurrentBalanceEur() )
-
-    # sellBtcForEur( 3523 )
-    # buyBtcForEur( 20 )
 
 
 ############################################################################# RUN
